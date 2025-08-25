@@ -1,13 +1,86 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
+<html>
+
+<head>
+  <!-- Page title -->
+  <title>Dodgy Dave's Stock Predictions</title>
+
+  <!-- Link to main CSS file -->
+  <link rel="stylesheet" href="./src/style.css">
+
+  <!-- Preconnect to Google Fonts for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts: Comic Neue for tag-lines, Poppins for main text -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Responsive meta tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <!-- Header with logo -->
+  <header>
+    <img src="./src/images/logo-dave-text.png" alt="Dodgy Dave's Stock Predictions">
+  </header>
+
+  <!-- Main content area -->
+  <main>
+    <!-- Action panel: user inputs tickers and generates report -->
+    <section class="action-panel">
+      <form id="ticker-input-form">
+        <!-- Instruction label for input -->
+        <label for="ticker-input">
+          Add up to 3 stock tickers below to get a super accurate stock predictions report👇
+        </label>
+
+        <!-- Input + add button wrapper -->
+        <div class="form-input-control">
+          <!-- Text input for stock ticker -->
+          <input type="text" id="ticker-input" placeholder="MSFT">
+
+          <!-- Button to add ticker to the list -->
+          <button class="add-ticker-btn">
+            <img src="./src/images/add.svg" class="add-ticker-svg" alt="add">
+          </button>
+        </div>
+      </form>
+
+      <!-- Display area for selected tickers -->
+      <p class="ticker-choice-display">
+        Your tickers will appear here...
+      </p>
+
+      <!-- Button to generate AI report (disabled until tickers added) -->
+      <button class="generate-report-btn" type="button" disabled>
+        Generate Report
+      </button>
+
+      <!-- Fun tagline -->
+      <p class="tag-line">Always correct 15% of the time!</p>
+    </section>
+
+    <!-- Loading panel: shows while fetching data -->
+    <section class="loading-panel">
+      <img src="./src/images/loader.svg" alt="loading">
+      <div id="api-message">Querying Stocks API...</div>
+    </section>
+
+    <!-- Output panel: displays the AI-generated report -->
+    <section class="output-panel">
+      <h2>Your Report 😜</h2>
+    </section>
+  </main>
+
+  <!-- Footer with disclaimer -->
+  <footer>
+    &copy; This is not real financial advice!
+  </footer>
+
+  <!-- Main JavaScript module -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
