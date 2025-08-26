@@ -9,7 +9,7 @@ export default {
 		try {
 			const response = await client.responses.create({
 				model: "gpt-4",
-				input: "Write a one-sentence bedtime story about a unicorn.",
+				input: "Who is considered to be the most daring woman explorer? Give me three options",
 			});
 			return new Response(response.output_text, {
 				headers: { "content-type": "text/plain"},
@@ -20,19 +20,6 @@ export default {
 	},
 };
 
-/*
-RESPONSE: 
-	Once upon a magical moonlit night, a dazzling unicorn named Luna embarked on a 
-	quest through shimmering forests and glowing rivers, discovering that her true 
-	magic was not in her sparkling horn, but in the kindness and love she spread, 
-	until finally, under a blanket of twinkling stars, Luna rested, her dreams filled 
-	with more incredible adventures.
-*/
-
-/*
-	NOTE ISSUE with outdated syntax in tutorial and 1101 error from Cloudflare. 
-	Check notes.md
-*/
 
 
 
@@ -58,6 +45,12 @@ npx wrangler secret put OPENAI_API_KEY
 ## Deploy the latest Worker changes
 npx wrangler deploy 
 
-This tutorial is outdated. Followed current : https://platform.openai.com/docs/guides/text 
+This tutorial is outdated. Followed current Docs
 
+OpenAI : https://platform.openai.com/docs/guides/text 
+npm openai: https://www.npmjs.com/package/openai
+
+Suggested by Scrimba Tutorial:
+https://developers.cloudflare.com/workers/configuration/secrets/#secrets-in-development
+https://developers.cloudflare.com/ai-gateway/tutorials/deploy-aig-worker/#3-configure-openai-in-your-worker
 */

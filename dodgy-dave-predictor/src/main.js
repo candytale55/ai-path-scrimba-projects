@@ -85,13 +85,25 @@ async function fetchReport(data) {
             `
     }
   ];
+  
   try {
-      // REMOVED CODE AND PASSED IT TO WORKER.
-    })
+    const url = "https://dodgy-dave-cloudflare-worker.candytale55.workers.dev/";
     
-    console.log(chatCompletion);
-    renderReport(chatCompletion.choices[0].message.content);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "",
+    });
+      //if (!response.ok) {
+      //  throw new Error(`Response status : ${response.status}`);
+      //}
+    
+    const aiText = result.output_text || result.choices?.[0]?.message?.content;
+    console.log(aiText);
+    
+    return new Response(JSON.stringify(aiText));
 
+        
   } catch (error) {
     console.error("Error: ", error.message);
     loadingArea.innerText = "Unable to access AI. Please refresh and try again"
@@ -107,3 +119,13 @@ function renderReport(output) {
   report.textContent = output
   outputArea.style.display = 'flex'
 }
+
+/*
+  Challenge:
+  1. Make a fetch request to the Worker url:
+    - The method should be 'POST'
+    - In the headers, the 'Content-Type' should be 'application/json'
+    - Set the body of the request to an empty string for now
+  2. Parse the response to a JavaScript object and assign it to a const
+  3. Log the response to the console to test
+*/
