@@ -1,5 +1,5 @@
 import { dates } from "./utils/dates.js"
-import OpenAI from OpenAI;
+
 
 const tickersArr = [];
 
@@ -86,17 +86,9 @@ async function fetchReport(data) {
     }
   ];
   try {
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-      dangerouslyAllowBrowser: true
+      // REMOVED CODE AND PASSED IT TO WORKER.
     })
-    const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: messages,
-      temperature: 1.1, 
-      presence_penalty: 0,
-      frequency_penalty: 0
-    });
+    
     console.log(chatCompletion);
     renderReport(chatCompletion.choices[0].message.content);
 
