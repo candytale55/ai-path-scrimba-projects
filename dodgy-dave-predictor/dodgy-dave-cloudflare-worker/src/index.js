@@ -34,15 +34,6 @@ export default {
 };
 
 
-/*
-	Worker answer: 
-
-	1. Gertrude Bell: she was an English writer, traveler, political officer, and archaeologist who explored the Middle East in the early 20th century. She played a large role in the establishment of the modern state of Iraq.
-
-	2. Nellie Bly: she was an American journalist and adventurer who, in 1889, embarked on a journey to travel around the world in less than 80 days, in emulation of Jules Verne's fictional character. She completed the trip in 72 days, which was a record at the time.
-
-	3. Annie Smith Peck: she was an American mountaineer who made her mark scaling peaks in North and South America. She was one of the first women to climb the Matterhorn and she broke several altitude records, including one at age 58.
-*/
 
 
 
