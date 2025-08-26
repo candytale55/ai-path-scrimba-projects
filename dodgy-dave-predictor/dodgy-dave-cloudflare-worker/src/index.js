@@ -1,27 +1,48 @@
 import OpenAI from 'openai';
 
+const corsHeaders = {
+	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Methods": "POST, OPTIONS",
+	"Access-Control-Allow-Headers": "Content-Type",
+};
 
 export default {
 	async fetch(request, env, ctx) {
-		const client = new OpenAI({
-			apiKey: env.OPENAI_API_KEY,
-		});
+
+		if (request.method === "OPTIONS") { // preflight.
+			return new Response(null, { headers: corsHeaders });
+		}
+
+		const client = new OpenAI({	apiKey: env.OPENAI_API_KEY, });
+
 		try {
 			const response = await client.responses.create({
 				model: "gpt-4",
 				input: "Who is considered to be the most daring woman explorer? Give me three options",
 			});
 			return new Response(response.output_text, {
-				headers: { "content-type": "text/plain"},
+				headers: { ...corsHeaders, "Content-Type": "text/plain" },
 			});
 		} catch (error) {
-			return new Response(error);
+			return new Response(JSON.stringify({ error: error.message }),
+				{
+					headers: { ...corsHeaders, "Content-Type": "application/json" },
+					status: 500,
+				});
 		}
-	},
+	}
 };
 
 
+/*
+	Worker answer: 
 
+	1. Gertrude Bell: she was an English writer, traveler, political officer, and archaeologist who explored the Middle East in the early 20th century. She played a large role in the establishment of the modern state of Iraq.
+
+	2. Nellie Bly: she was an American journalist and adventurer who, in 1889, embarked on a journey to travel around the world in less than 80 days, in emulation of Jules Verne's fictional character. She completed the trip in 72 days, which was a record at the time.
+
+	3. Annie Smith Peck: she was an American mountaineer who made her mark scaling peaks in North and South America. She was one of the first women to climb the Matterhorn and she broke several altitude records, including one at age 58.
+*/
 
 
 

@@ -47,6 +47,10 @@ async function fetchStockData() {
   document.querySelector(".action-panel").style.display = "none";
   loadingArea.style.display = 'flex'
   try {
+
+    
+
+
     const stockData = await Promise.all(tickersArr.map(async (ticker) => {
       const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${dates.startDate}/${dates.endDate}?apiKey=${process.env.POLYGON_API_KEY}`
       const response = await fetch(url)
