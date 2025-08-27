@@ -47,12 +47,9 @@ async function fetchStockData() {
   document.querySelector(".action-panel").style.display = "none";
   loadingArea.style.display = 'flex'
   try {
-
-
-
-
+    
     const stockData = await Promise.all(tickersArr.map(async (ticker) => {
-      const url = `https://polygon-api-worker.candytale55.workers.dev/?ticker=/${ticker}/range/1/day/${dates.startDate}/${dates.endDate}?apiKey=${process.env.POLYGON_API_KEY}`
+      const url = `https://polygon-api-worker.candytale55.workers.dev/?ticker=${ticker}&/range/1/day/${dates.startDate}&${dates.endDate}`
       const response = await fetch(url)
       const data = await response.text()
       const status = await response.status
@@ -96,14 +93,16 @@ async function fetchReport(data) {
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: "",
+      body: JSON.stringify({ messages }) ,
     });
-      //if (!response.ok) {
-      //  throw new Error(`Response status : ${response.status}`);
-      //}
+
+      if (!response.ok) {
+        throw new Error(`Response status : ${response.status}`);
+      }
     
-    const aiText = result.output_text || result.choices?.[0]?.message?.content;
-    console.log(aiText);
+    // Worker sends back plain text (response.output_text)
+    const aiText = await response.text();
+    console.log("AI Response", aiText);
     
     return new Response(JSON.stringify(aiText));
 
@@ -124,12 +123,3 @@ function renderReport(output) {
   outputArea.style.display = 'flex'
 }
 
-/*
-  Challenge:
-  1. Make a fetch request to the Worker url:
-    - The method should be 'POST'
-    - In the headers, the 'Content-Type' should be 'application/json'
-    - Set the body of the request to an empty string for now
-  2. Parse the response to a JavaScript object and assign it to a const
-  3. Log the response to the console to test
-*/

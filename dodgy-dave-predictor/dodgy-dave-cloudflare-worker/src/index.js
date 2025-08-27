@@ -13,16 +13,23 @@ export default {
 			return new Response(null, { headers: corsHeaders });
 		}
 
-		const client = new OpenAI({	apiKey: env.OPENAI_API_KEY, });
-
 		try {
+
+			// Parse JSON body from frontend
+			const { messages } = await request.json();
+
+			const client = new OpenAI({ apiKey: env.OPENAI_API_KEY, });
+
 			const response = await client.responses.create({
 				model: "gpt-4",
-				input: "Who is considered to be the most daring woman explorer? Give me three options",
+				messages,
 			});
+
+			
 			return new Response(response.output_text, {
 				headers: { ...corsHeaders, "Content-Type": "text/plain" },
 			});
+			
 		} catch (error) {
 			return new Response(JSON.stringify({ error: error.message }),
 				{
