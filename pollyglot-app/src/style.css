@@ -1,0 +1,21 @@
+:root {
+  --green: #32CD32;
+  --white: #FFFFFF;
+  --dark-blue: #1C325F;
+  --very-dark-blue: #0D182E;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+
+#app {
+  width: 390px;
+  height: 780px;
+  background-color: antiquewhite;   /* TODO: Remove, only for ref */
+  margin: 10px auto;
+}

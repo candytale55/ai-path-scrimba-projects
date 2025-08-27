@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pollyglot Translator</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+  <body>
+    <div id="app">
+          <!-- Header -->
+          <header class="header">
+            <div class="header-content">
+              <img src="./img/parrot.png" alt="Pollyglot Logo" class="header-logo">
+              <div class="header-text">
+                <h1 class="header-title">PollyGlot</h1>
+                <p class="header-tagline">Perfect Translation Every Time</p>
+              </div>
+            </div>
+          </header>
+          
+          <!-- Main -->
+          <main class="main">
+            <div class="main-card">
+              <!-- Translation Input -->
+              <section class="card card-input">
+                <h2>Text to translate 👇</h2>
+                <form class="translation-form">
+                  <textarea class="translation-textarea" placeholder="How are you?"></textarea>
+          
+                  <h3 class="card-subtitle">Select language</h3>
+                  <div class="language-selection">
+                    <label class="language-label">
+                      <input type="radio" name="language" value="french" checked>
+                      French
+                      <img src="./img/french-flag.png" alt="French flag" class="language-flag">
+                    </label>
+                    <label class="language-label">
+                      <input type="radio" name="language" value="spanish">
+                      Spanish
+                      <img src="./img/spanish-flag.png" alt="Spanish flag" class="language-flag">
+                    </label>
+                    <label class="language-label">
+                      <input type="radio" name="language" value="portuguese">
+                      Portuguese
+                      <img src="./img/portuguese-flag.png" alt="Portuguese flag" class="language-flag">
+                    </label>
+                  </div>
+          
+                  <button type="submit" class="button button-primary">Translate</button>
+                </form>
+              </section>
+          
+          
+              <!-- Translation Output -->
+              <section class="card card-output" hidden>
+                ...
+              </section>
+          
+              <!-- Chat Interface -->
+              <section class="card card-chat" hidden>
+                ...
+              </section>
+            </div>
+          </main>
+          
+          </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
