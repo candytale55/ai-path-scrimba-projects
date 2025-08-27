@@ -1,5 +1,5 @@
 import { dates } from "./utils/dates.js"
-import OpenAI from OpenAI;
+
 
 const tickersArr = [];
 
@@ -47,8 +47,9 @@ async function fetchStockData() {
   document.querySelector(".action-panel").style.display = "none";
   loadingArea.style.display = 'flex'
   try {
+    
     const stockData = await Promise.all(tickersArr.map(async (ticker) => {
-      const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${dates.startDate}/${dates.endDate}?apiKey=${process.env.POLYGON_API_KEY}`
+      const url = `https://polygon-api-worker.candytale55.workers.dev/?ticker=${ticker}&/range/1/day/${dates.startDate}&${dates.endDate}`
       const response = await fetch(url)
       const data = await response.text()
       const status = await response.status
@@ -85,21 +86,27 @@ async function fetchReport(data) {
             `
     }
   ];
+  
   try {
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-      dangerouslyAllowBrowser: true
-    })
-    const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: messages,
-      temperature: 1.1, 
-      presence_penalty: 0,
-      frequency_penalty: 0
+    const url = "https://dodgy-dave-cloudflare-worker.candytale55.workers.dev/";
+    
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages }) ,
     });
-    console.log(chatCompletion);
-    renderReport(chatCompletion.choices[0].message.content);
 
+      if (!response.ok) {
+        throw new Error(`Response status : ${response.status}`);
+      }
+    
+    // Worker sends back plain text (response.output_text)
+    const aiText = await response.text();
+    console.log("AI Response", aiText);
+    
+    return new Response(JSON.stringify(aiText));
+
+        
   } catch (error) {
     console.error("Error: ", error.message);
     loadingArea.innerText = "Unable to access AI. Please refresh and try again"
@@ -115,3 +122,4 @@ function renderReport(output) {
   report.textContent = output
   outputArea.style.display = 'flex'
 }
+
