@@ -1,13 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <!-- Standard meta tags for character encoding and responsive design -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summarizer</title>
+  <meta name="description" content="Summarize your text effortlessly with the Summarizer.">
+
+  <!-- External CSS Dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+  <!-- Google Fonts - Orbitron for futuristic look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+
+
+<body>
+  <!-- ===== MAIN CONTAINER ===== -->
+  <!-- Flex container that holds the entire application layout -->
+  <div class="flex-column container">
+
+    <!-- ===== HEADER SECTION ===== -->
+    <!-- Contains the app branding with background image and overlaid title -->
+    <header>
+      <!-- Background header image (cool dog with sunglasses) -->
+      <img class="header-image" src="./src/images/cool-dog.webp" alt="Cool dog with sunglasses on">
+
+      <!-- App title positioned absolutely over the image -->
+      <h1 class="header-title">
+        <span class="header-title-line-1">The</span>
+        <span class="header-title-line-2">Summarizer</span>
+      </h1>
+    </header>
+
+    <!-- ===== MAIN APPLICATION AREA ===== -->
+    <!-- Split into two main sections: input area and output area -->
+    <main>
+
+      <!-- ===== LEFT SECTION: TEXT INPUT & CONTROLS ===== -->
+      <section class="flex-column text-input-area-section">
+
+        <!-- Text input textarea where users paste content to summarize -->
+        <textarea id="text-input-area" placeholder="Paste text here" aria-label="Paste text here to summarize">
+				</textarea>
+
+        <!-- ===== INPUT CONTROLS ===== -->
+        <div class="flex-column controls">
+
+          <!-- Summary length slider control (starts disabled) -->
+          <div id="summary-length-container" class="flex-column summary-length-container disabled">
+            <!-- Slider with min/max labels -->
+            <div class="summary-length-group">
+              <span class="summary-length-min-label">1</span>
+              <input type="range" id="summary-length-input" class="summary-length-input" min="1" max="100" value="10"
+                aria-labelledby="summary-length-text" disabled>
+              <span class="summary-length-max-label">100</span>
+            </div>
+            <!-- Dynamic text showing current slider value -->
+            <span id="summary-length-text" class="summary-length-text">Summary Length: 10 Words</span>
+          </div>
+
+          <!-- Primary action button to trigger summarization -->
+          <button id="summarize-button" class="button summarize-button" disabled>Summarize</button>
+        </div>
+      </section>
+
+      <!-- ===== RIGHT SECTION: SUMMARY OUTPUT & STATES ===== -->
+      <section id="summary-output-section" class="flex-column summary-output-section">
+
+        <!-- ===== DEFAULT STATE: Summary Content ===== -->
+        <!-- This is the main output view showing results and action buttons -->
+        <div id="summary-content" class="flex-column summary-content">
+          <!-- Output textarea displaying the generated summary -->
+          <textarea id="summary-output-area" placeholder="See summary here" aria-label="Summary of text" disabled>
+					</textarea>
+
+          <!-- Action buttons for summary output -->
+          <div class="flex-column controls">
+            <!-- Copy summary to clipboard -->
+            <button id="copy-button" class="button button-full-width" disabled>Copy</button>
+            <!-- Clear the summary output -->
+            <button id="clear-button" class="button button-full-width" disabled>Clear</button>
+          </div>
+        </div>
+
+        <!-- ===== LOADING STATE ===== -->
+        <!-- Shown while API call is in progress (initially hidden) -->
+        <div id="loading-section" class="flex-column loading-section" aria-live="polite">
+          <!-- Animated loading spinner -->
+          <img src="images/loading-spinner.svg" alt="Loading spinner">
+          <!-- Loading message for user feedback -->
+          <div id="loading-message" class="loading-message">Summarizing...</div>
+        </div>
+
+        <!-- ===== ERROR STATE ===== -->
+        <!-- Shown when summarization fails (initially hidden) -->
+        <div id="error-section" class="flex-column error-section" aria-live="assertive">
+          <!-- Dynamic error message container -->
+          <div id="error-message" class="error-message"></div>
+          <!-- Button to dismiss error and return to normal state -->
+          <button id="dismiss-error-button" class="button button-full-width">Dismiss Error</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== JAVASCRIPT MODULE ===== -->
+  <!-- External JS file handling all application logic -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+
 </html>
