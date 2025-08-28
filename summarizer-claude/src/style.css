@@ -1,96 +1,389 @@
+/* ===== CSS CUSTOM PROPERTIES (VARIABLES) ===== */
+/* Centralized color scheme and design tokens */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-family: "Orbitron", sans-serif;
+  /* Futuristic Google Font */
+  --text-color: #0F0000;
+  /* Dark red/black text */
+  --background-color: #83B0BD;
+  /* Light blue-gray background */
+  --input-background-color: #FCD9D3;
+  /* Light peach for inputs */
+  --button-background-color: #F9B759;
+  /* Orange/yellow for buttons */
+  --copied-background-color: #83f5bc;
+  /* Green for copy success */
+  --failed-background-color: #ffa3a3;
+  /* Red for errors */
+  --hover-color: #fba122;
+  /* Darker orange for hover */
+  --focus-color: #9F570A;
+  /* Brown/orange for focus */
+  --slider-thumb-color: #9F570A;
+  /* Slider thumb color */
+  --disabled-color: #B38443;
+  /* Muted brown for disabled */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* ===== GLOBAL RESET & BASE STYLES ===== */
+* {
+  box-sizing: border-box;
+  /* Include padding/border in width calculations */
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  /* Full viewport height */
+  font-family: var(--font-family);
+  /* Apply Orbitron font globally */
+  color: var(--text-color);
+  background: var(--background-color);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.flex-column {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  /* Stack children vertically */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ===== LAYOUT CONTAINERS ===== */
+.container {
+  align-items: center;
+  /* Center horizontally */
+  height: 100vh;
+  /* Full viewport height */
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Main grid layout - switches between rows/columns based on screen size */
+main {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  /* Two equal height rows on mobile */
+  width: 100%;
+  height: 100%;
+  padding: 0.8em;
+  gap: 0.8em;
+  /* Space between grid items */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+section {
+  width: 100%;
+  /* Full width within grid */
 }
 
-.card {
-  padding: 2em;
+/* ===== HEADER STYLES ===== */
+/* Positioned header with overlaid text on background image */
+header {
+  position: relative;
+  /* For absolute positioning of title */
+  width: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+.header-image {
+  width: 100%;
+  display: block;
+  /* Remove inline spacing */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+/* Absolutely positioned title over the header image */
+.header-title {
+  position: absolute;
+  top: 0.5vh;
+  /* 0.5% of viewport height from top */
+  left: 5.5vw;
+  /* 5.5% of viewport width from left */
+  font-weight: bold;
+}
+
+/* First line of title - smaller text */
+.header-title-line-1 {
+  font-size: clamp(0.6rem, 5vw, 5rem);
+  /* Responsive font size */
+  line-height: 1.6;
+  display: block;
+  /* Stack on separate line */
+}
+
+/* Second line of title - larger text */
+.header-title-line-2 {
+  font-size: clamp(1.8rem, 8vw, 8rem);
+  /* Responsive font size */
+  line-height: 1.2;
+}
+
+/* ===== FORM ELEMENTS ===== */
+/* Styling for both input and output textareas */
+textarea {
+  width: 100%;
+  flex-grow: 1;
+  /* Expand to fill available space */
+  min-height: 8.75em;
+  /* Minimum height constraint */
+  resize: none;
+  /* Disable user resizing */
+  border: none;
+  border-radius: 6px;
+  background-color: var(--input-background-color);
+  padding: 0.8em 0.6em;
+  margin-bottom: 0.8em;
+  font-family: sans-serif;
+  /* Different from header font */
+}
+
+textarea::placeholder {
+  color: var(--text-color);
+  /* Match placeholder to text color */
+}
+
+/* ===== CONTROLS SECTION ===== */
+/* Container for slider and buttons */
+.controls {
+  justify-content: space-between;
+  /* Distribute space evenly */
+  gap: 0.8em;
+  width: 100%;
+}
+
+/* ===== SUMMARY LENGTH SLIDER CONTROLS ===== */
+.summary-length-container {
+  flex-grow: 0.8;
+  /* Take up more space than button */
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Slider layout with min/max labels */
+.summary-length-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  width: 100%;
+}
+
+/* Custom styled range input */
+.summary-length-input {
+  flex-grow: 1;
+  /* Expand between labels */
+  appearance: none;
+  /* Remove default styling */
+  height: 0.8em;
+  border-radius: 15px;
+  background-color: var(--button-background-color);
+}
+
+.summary-length-text {
+  font-size: 0.7rem;
+  /* Smaller text for current value display */
+}
+
+/* ===== BUTTON STYLES ===== */
+/* Base button styling applied to all buttons */
+.button {
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* Use parent font */
+  font-weight: bold;
+  background-color: var(--button-background-color);
+  border: none;
+  border-radius: 5px;
+  padding: 0.875em 0.65em;
+  height: 2.5em;
+  /* Fixed height for consistency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Full width buttons (copy, clear, dismiss error) */
+.button-full-width {
+  width: 100%;
+}
+
+/* Specific styling for summarize button */
+.summarize-button {
+  flex-basis: 40%;
+  /* Take 40% of available space */
+  padding: 0.875em 1em;
+}
+
+/* ===== INTERACTIVE STATES ===== */
+
+/* Focus states for accessibility */
+textarea:focus,
+input[type="range"]:focus,
+.button:focus {
+  outline: 2px solid var(--focus-color);
+  /* Visible focus indicator */
+}
+
+/* Hover states for interactive elements */
+.button:not(:disabled):hover,
+.summary-length-input:not(:disabled):hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+/* Disabled states */
+.disabled,
+:disabled {
+  color: var(--disabled-color);
+  cursor: not-allowed;
+  /* Show disabled cursor */
+}
+
+textarea:disabled::placeholder {
+  color: var(--disabled-color);
+  /* Muted placeholder when disabled */
+}
+
+/* ===== FEEDBACK STATES ===== */
+/* Visual feedback for copy operations */
+.copied {
+  background-color: var(--copied-background-color) !important;
+  /* Green success */
+}
+
+.failed {
+  background-color: var(--failed-background-color) !important;
+  /* Red failure */
+}
+
+/* ===== RANGE SLIDER CUSTOMIZATION ===== */
+/* Custom styling for slider thumbs across different browsers */
+
+/* WebKit browsers (Chrome, Safari, newer Edge) */
+.summary-length-input::-webkit-slider-thumb {
+  appearance: none;
+  /* Remove default styling */
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  /* Make circular */
+  background: var(--slider-thumb-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* Smooth color transitions */
+}
+
+.summary-length-input:disabled::-webkit-slider-thumb {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+/* Firefox */
+.summary-length-input::-moz-range-thumb {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: var(--slider-thumb-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.summary-length-input:disabled::-moz-range-thumb {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+/* Microsoft Edge (older versions) */
+.summary-length-input::-ms-thumb {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: var(--slider-thumb-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.summary-length-input:disabled::-ms-thumb {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+/* ===== OUTPUT SECTION STATE MANAGEMENT ===== */
+/* Container for different output states (content, loading, error) */
+.summary-output-section {
+  position: relative;
+  /* For absolute positioning of state layers */
+}
+
+/* All state layers positioned absolutely within the output section */
+.summary-content,
+.loading-section,
+.error-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Default content state */
+.summary-content {
+  z-index: 1;
+  /* Lowest layer */
+}
+
+/* Loading and error states */
+.loading-section,
+.error-section {
+  display: none;
+  /* Hidden by default */
+  z-index: 2;
+  /* Above content layer */
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  /* Cover content below */
+}
+
+/* Loading spinner sizing */
+.loading-section img {
+  max-width: 100px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+
+/* Message styling for loading and error states */
+.loading-message,
+.error-message {
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+.error-message {
+  width: 100%;
+  word-wrap: break-word;
+  /* Handle long error messages */
+  margin-bottom: 1em;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Small tablet and up - horizontal layout for controls */
+@media screen and (min-width: 360px) {
+  .controls {
+    flex-direction: row;
+    /* Side-by-side layout */
   }
-  a:hover {
-    color: #747bff;
+
+  .summary-length-container {
+    align-items: stretch;
+    /* Match height with button */
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+/* Tablet and up - side-by-side main layout */
+@media screen and (min-width: 768px) {
+  main {
+    grid-template: 1fr / 1fr 1fr;
+    /* Two equal width columns */
+    align-items: stretch;
+    /* Equal height columns */
   }
 }
