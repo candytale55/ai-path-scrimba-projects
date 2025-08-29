@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PopChoice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Roboto+Slab:wght@300;400&display=swap"
+    rel="stylesheet">
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+      <!-- Branding Container -->
+      <div class="branding-container">
+        <img src="./src/images/PopChoice Icon.png" alt="PopChoice Icon">
+        <h1>PopChoice</h1>
+      </div>
+    
+      <!-- Section for all questions -->
+      <section class="all-questions-section">
+        <div id="question-block-1" class="question-block">
+          <h2 id="question-1" class="question-text-h2">What's your favorite movie and why?</h2>
+          <textarea name="answer-1" id="answer-1" class="answer-input-textarea"
+            placeholder="The Shawshank Redemption, because it taught me to never give up hope no matt"></textarea>
+        </div>
+    
+        <div id="question-block-2" class="question-block">
+          <h2 id="question-2" class="question-text-h2">Are you in the mood for something new or a classic?</h2>
+          <textarea name="answer-2" id="answer-2" class="answer-input-textarea"
+            placeholder="I want to watch movies that were released after 1990"></textarea>
+        </div>
+    
+        <div id="question-block-3" class="question-block">
+          <h2 id="question-3" class="question-text-h2">Do you wanna have fun or do you want something serious?</h2>
+          <textarea name="answer-3" id="answer-3" class="answer-input-textarea"
+            placeholder="I want to watch something stupid and fun"></textarea>
+        </div>
+      </section>
+    
+      <!-- Let's Go Button - Semantic Button -->
+      <button type="button" class="let-s-go-button">
+        Let's Go
+      </button>
+    </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

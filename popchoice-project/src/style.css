@@ -1,0 +1,199 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* General styling for the body and overall container */
+body {
+  margin: 0;
+  font-family: 'Roboto Slab', serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #E0E0E0;
+  /* Light gray for general text */
+}
+
+/* Main application container, fixed dimensions for the app itself */
+.app-container {
+  width: 390px;
+  /* Fixed width as per design */
+  height: 844px;
+  /* Fixed height as per design */
+  background-color: #1A1A40;
+  /* Dark blue background */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  /* Ensure content doesn't spill out */
+  padding-top: 50px;
+  /* To account for the branding container top offset */
+
+  /* Include padding in height */
+}
+
+/* Branding Container */
+.branding-container {
+  position: absolute;
+  width: 235px;
+  height: 174px;
+  /* Height now accommodates both image and h1 */
+  top: 50px;
+  left: 79px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center horizontally */
+  justify-content: flex-start;
+  /* Align to the start of the flex container */
+}
+
+/* PopChoice Icon (Popcorn Image) - Directly inside branding-container */
+.branding-container img {
+  /* Targeting the img directly inside branding-container */
+  width: 99px;
+  height: 108px;
+  object-fit: contain;
+  /* Ensures the image fits without cropping */
+  margin-bottom: 5px;
+  /* Space between icon and text */
+}
+
+/* PopChoice Text (now h1) */
+.branding-container h1 {
+  /* Targeting the h1 directly inside branding-container */
+  font-family: 'Carter One', cursive;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 1;
+  /* 100% line height */
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  /* White color */
+  margin: 0;
+  /* Reset default h1 margin */
+  text-align: center;
+}
+
+/* Section for all questions wrapper */
+.all-questions-section {
+  position: absolute;
+  top: 260px;
+  /* Aligns with the top of the first question */
+  left: 32px;
+  /* Aligns with the leftmost question */
+  width: 328px;
+  /* Max width of the question blocks */
+  /* Height will be determined by content, no fixed height needed here, will adjust to children */
+}
+
+/* Individual question block (container for h2 and textarea) */
+.question-block {
+  background-color: #333366;
+  /* Darker blue for question background */
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+  width: 100%;
+  /* Takes full width of .all-questions-section */
+  position: absolute;
+  /* Positioned relative to .all-questions-section */
+  left: 0;
+}
+
+/* Specific positioning and height for each question block */
+#question-block-1 {
+  top: 0px;
+  height: 108px;
+  /* Original height of Question 1 container */
+}
+
+#question-block-2 {
+  top: 144px;
+  /* Calculated from original tops: 404px - 260px = 144px */
+  height: 113px;
+  /* Original height of Question 2 container */
+}
+
+#question-block-3 {
+  top: 293px;
+  /* Calculated from original tops: 553px - 260px = 293px */
+  height: 114px;
+  /* Original height of Question 3 container */
+}
+
+
+/* Question text (h2) */
+.question-text-h2 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0%;
+  color: #E0E0E0;
+  margin: 0 0 10px 0;
+  /* Margin-bottom for spacing with textarea */
+}
+
+/* Answer input textarea */
+.answer-input-textarea {
+  background-color: #555588;
+  /* Match answer group background */
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #FFFFFF;
+  border: none;
+  width: 100%;
+  resize: none;
+  /* Disable textarea resizing */
+}
+
+/* Custom min-height for first question's textarea to match original design's content capacity */
+#question-block-1 .answer-input-textarea {
+  min-height: 57px;
+  /* Matches the text height from the original design parameter */
+}
+
+/* Ensure the other textareas also have a defined height if not specifically sized by content */
+#question-block-2 .answer-input-textarea,
+#question-block-3 .answer-input-textarea {
+  min-height: 64px;
+  /* Standard height for textareas as per design parameters */
+}
+
+
+/* Let's Go Button (semantic button) */
+.let-s-go-button {
+  background-color: #66CC99;
+  /* Green color */
+  border-radius: 10px;
+  width: 325px;
+  height: 71px;
+  position: absolute;
+  top: 713px;
+  left: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #1A1A40;
+  /* Dark blue text color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  /* Remove default button border */
+}
+
+.let-s-go-button:hover {
+  background-color: #5CB87C;
+  /* Slightly darker green on hover */
+}
